@@ -10,7 +10,7 @@
     
     <?php
     $nome="Ryan";
-    echo "<h2> "Ola $nome !!! </h2>" 
+    echo "<h2> Ola $nome !!! </h2>"; 
     ?>
 </body>
 </html>

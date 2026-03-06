@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # Interpretador PHP
+  php:
+    image: php:8.2-fpm
+    volumes:
+      - .:/var/www/html
+    networks:
+      - rede-aula
+
+  # Servidor Web Nginx
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - rede-aula
+
+  # Banco de Dados
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: aula
+    networks:
+      - rede-aula
+
+  # Interface do Banco
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+    networks:
+      - rede-aula
+
+networks:
+  rede-aula:
+    driver: bridge
+
