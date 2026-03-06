@@ -7,5 +7,10 @@
 </head>
 <body>
     <h1>Meu nginx</h1>
+    
+    <?php
+    $nome="Ryan";
+    echo "<h2> "Ola $nome !!! </h2>" 
+    ?>
 </body>
 </html>
